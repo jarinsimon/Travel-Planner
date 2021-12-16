@@ -31,7 +31,10 @@
 						<!--Origin card section-->
 						<div class="col-sm">
 							<div class="mb-2">
-								<label id="origin-label" for="origin-input" class="form-label">Origin</label>
+								<label 
+									id="origin-label"
+									for="origin-input" 
+									class="form-label">Origin</label>
 								<div class="input-group">
 									<span class="input-group-text">
 										<i class="bi-pin-map-fill"></i>
@@ -51,7 +54,10 @@
 						<!--Destination card section-->
 						<div class="col-sm">
 							<div class="mb-2">
-								<label id="destination-label" for="destination-input" class="form-label">Destination</label>
+								<label 
+									id="destination-label"
+									for="destination-input"
+									class="form-label">Destination</label>
 								<div class="input-group">
 									<span class="input-group-text">
 										<i class="bi-pin-map-fill"></i>
@@ -78,7 +84,10 @@
 						<div class="card-body">
 							<h4 class="card-title">Flight Dates</h4>
 							<div class="mb-2">
-								<label id="flight-type-label" for="flight-type-select" class="form-label">Flight</label>
+								<label 
+									id="flight-type-label"
+									for="flight-type-select"
+									class="form-label">Flight</label>
 								<select
 									id="flight-type-select"
 									class="form-select"
@@ -130,7 +139,27 @@
 					</div>
 				</div>
 				<div class="mb-2 col">
-					<div class="h-100 card"></div>
+					<div class="h-100 card">
+						<div class="card-body">
+							<h4 class="card-title">Details</h4>
+							<label class="form-label">Number of Passengers</label>
+							<div class="mb-2">
+								<div class="input-group">
+									<label 
+										for="adults-input" 
+										class="input-group-text"
+									>Adults</label>
+									<input
+										type="number"
+										min="1"
+										class="form-control"
+										id="adults-input"
+										aria-describedby="adults-label"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
