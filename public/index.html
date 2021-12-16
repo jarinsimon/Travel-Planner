@@ -71,6 +71,68 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="row">
+				<div class="mb-2 col">
+					<div class="h-100 card">
+						<div class="card-body">
+							<h4 class="card-title">Flight Dates</h4>
+							<div class="mb-2">
+								<label id="flight-type-label" for="flight-type-select" class="form-label">Flight</label>
+								<select
+									id="flight-type-select"
+									class="form-select"
+									aria-describedby="flight-type-label"
+								>
+									<option value="one-way">One-way</option>
+									<option value="round-trip">Round-trip</option>
+								</select>
+							</div>
+							<div id="departure-date" class="mb-2">
+								<label 
+									id="departure-date-label" 
+									for="departure-date-input" 
+									class="form-label"
+								>Departure Date</label>
+
+								<div class="input-group">
+									<span class="input-group-text">
+										<i class="bi-calendar"></i>
+									</span>
+									<input
+										type="date"
+										class="form-control"
+										id="departure-date-input"
+										aria-describedby="departure-date-label"
+									>
+								</div>
+							</div>
+							<div id="return-date" class="mb-2">
+								<label 
+									id="return-date-label"
+									for="return-date-input"
+									class="form-label"
+								>Return Date</label>
+
+								<div class="input-group">
+									<span class="input-group-text">
+										<i class="bi-calendar"></i>
+									</span>
+									<input
+										type="date"
+										class="form-control"
+										id="return-date-input"
+										aria-describedby="return-date-label"
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="mb-2 col">
+					<div class="h-100 card"></div>
+				</div>
+			</div>
 		</div>
 		<!--Embeds script.js-->
 		<script src="./script.js"></script>
