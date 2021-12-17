@@ -9,6 +9,15 @@ const returnDateInput = document.getElementById("return-date-input");
 const adultsInput = document.getElementById("adults-input");
 const searchButton = document.getElementById("search-button");
 
+const searchResultsSeparator = document.getElementById("search-results-separator");
+const searchResultsLoader = document.getElementById("search-results-loader");
+const searchResults = document.getElementById("search-results");
+
+const autocompleteTimeout = 300;
+let autocompleteTimeoutHandle = 0;
+let destinationCityCodes = {};
+let originCityCodes = {};
+
 const reset = () => {
 	originInput.value = "";
 	destinationInput.value = "";
@@ -17,6 +26,44 @@ const reset = () => {
 	returnDate.valueAsDate = new Date();
 	adultsInput.value = 1;
 	searchButton.disabled = true;
+	searchResultsSeparator.classList.add("d-none");
+	searchResultsLoader.classList.add("d-none");
+};
+
+const autocomplete = (input, datalist, cityCodes) => {
+	clearTimeout(autocompleteTimeoutHandle);
+	autocompleteTimeoutHandle = setTimeout(async () => {
+	  try {
+		const params = new URLSearchParams({ keyword: input.value });
+		const response = await fetch(`/api/autocomplete?${params}`);
+		const data = await response.json();
+		datalist.textContent = "";
+		data.forEach((entry) => {
+		  cityCodes[entry.name.toLowerCase()] = entry.iataCode;
+		  datalist.insertAdjacentHTML("beforeend",`<option value="${entry.name}"></option>`);
+		});
+	  } catch (error) {
+		console.error(error);
+	  }
+	}, autocompleteTimeout);
+};
+
+const search = async () => {
+	try {
+		const returns = flightTypeSelect.value === "round-trip";
+		const params = new URLSearchParams({
+			origin: originCityCodes[originInput.value.toLowerCase()],
+			destination: destinationCityCodes[destinationInput.value.toLowerCase()],
+			departureDate: formatDate(departureDateInput.valueAsDate),
+			adults: formatNumber(adultsInput.value),
+		});
+		const response = await fetch(`/search?${params}`);
+		const data = await response.json();
+
+		return data;
+	} catch (error) {
+		console.error(error);
+	}
 };
 
 //Event handler to disable/enable search button based on completion of all search form values
