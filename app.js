@@ -33,15 +33,36 @@ app.get('/citySearch', async function(req, res){
 	}
 });
 
-app.get('/flightSearch', async function(req, res){
-	const response = await amadeus.shopping.flightOffersSearch.get({
-		originLocationCode: 'HNL',
-		destinationLocationCode: 'SJC', 
-		departureDate: '2021-12-17',
-		adults: '1'
-	}).then(function (res){
-		console.log(res);
-	}).catch(function (res){
-		console.error(res);
-	});
+app.use(express.static("public"));
+
+app.get('/autocomplete', async(req, res) => {
+	try {
+		const { query } = req;
+		const { data } = await amadeus.referenceData.locations.get({
+			keyword: query.keyword,
+			subType: Amadeus.location.city,
+		});
+		res.json(data);
+	} catch (err) {
+		console.error(err.res);
+		res.json([]);
+	}
+});
+
+app.get('/flightSearch', async(req, res) => {
+	try{
+		const { query } = req;
+		console.log(query)
+		const { data } = await amadeus.shopping.flightOffersSearch.get({
+			originLocationCode: query.origin,
+			destinationLocationCode: query.destination,
+			departureDate: query.departureDate,
+			adults: query.adults,
+			...(query.returnDate ? { returnDate: query.returnDate } : {}),
+		});
+		res.json(data);
+	} catch (err){
+		console.error(err.res);
+		res.json([]);
+	}
 });
