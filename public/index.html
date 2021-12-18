@@ -143,6 +143,23 @@
 					<div class="h-100 card">
 						<div class="card-body">
 							<h4 class="card-title">Details</h4>
+							<div class="mb-2">
+								<label 
+									id="travel-class-label"
+									for="travel-class-select"
+									class="form-label"
+								>Travel class</label>
+								<select
+									id="travel-class-select"
+									class="form-select"
+									aria-describedby="travel-class-label"
+								>
+									<option value="ECONOMY">Economy</option>
+									<option value="PREMIUM_ECONOMY">Premium Economy</option>
+									<option value="BUSINESS">Business</option>
+									<option value="FIRST">First Class</option>
+								</select>
+							</div>
 							<label class="form-label">Number of Passengers</label>
 							<div class="mb-2">
 								<div class="input-group">
@@ -156,6 +173,36 @@
 										class="form-control"
 										id="adults-input"
 										aria-describedby="adults-label"
+									>
+								</div>
+							</div>
+							<div class="mb-2">
+								<div class="input-group">
+									<label 
+										for="children-input" 
+										class="input-group-text"
+									>Children</label>
+									<input
+										type="number"
+										min="0"
+										class="form-control"
+										id="children-input"
+										aria-describedby="children-label"
+									>
+								</div>
+							</div>
+							<div class="mb-2">
+								<div class="input-group">
+									<label 
+										for="infants-input" 
+										class="input-group-text"
+									>Infants</label>
+									<input
+										type="number"
+										min="0"
+										class="form-control"
+										id="infants-input"
+										aria-describedby="infants-label"
 									>
 								</div>
 							</div>
