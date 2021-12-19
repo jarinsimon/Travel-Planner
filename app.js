@@ -58,6 +58,8 @@ app.get('/flightSearch', async(req, res) => {
 			destinationLocationCode: query.destination,
 			departureDate: query.departureDate,
 			adults: query.adults,
+			children: query.children,
+			infants: query.infants,
 			...(query.returnDate ? { returnDate: query.returnDate } : {}),
 		});
 		res.json(data);
