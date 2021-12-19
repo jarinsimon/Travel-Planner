@@ -6,7 +6,10 @@ const flightTypeSelect = document.getElementById("flight-type-select");
 const departureDateInput = document.getElementById("departure-date-input");
 const returnDate = document.getElementById("return-date");
 const returnDateInput = document.getElementById("return-date-input");
+const travelClassInput = document.getElementById("travel-class-select");
 const adultsInput = document.getElementById("adults-input");
+const childrenInput = document.getElementById("children-input");
+const infantsInput = document.getElementById("infants-input");
 const searchButton = document.getElementById("search-button");
 
 const searchResultsSeparator = document.getElementById("search-results-separator");
@@ -24,7 +27,11 @@ const reset = () => {
 	flightTypeSelect.value = "";
 	departureDateInput.valueAsDate = new Date();
 	returnDate.valueAsDate = new Date();
+	returnDate.classList.add("d-none");
+	travelClassSelect.value = "ECONOMY";
 	adultsInput.value = 1;
+	childrenInput.value = 0;
+	infantsInput.value = 0;
 	searchButton.disabled = true;
 	searchResultsSeparator.classList.add("d-none");
 	searchResultsLoader.classList.add("d-none");
@@ -106,6 +113,10 @@ const search = async () => {
 			destination: destinationCityCodes[destinationInput.value.toLowerCase()],
 			departureDate: formatDate(departureDateInput.valueAsDate),
 			adults: formatNumber(adultsInput.value),
+			children: formatNumber(childrenInput.value),
+			infants: formatNumber(infantsInput.value),
+			travelClass: travelClassSelect.value,
+			...(returns ? { returnDate: formatDate(returnDateInput.valueAsDate) } : {}),
 		});
 		const response = await fetch(`/search?${params}`);
 		const data = await response.json();
@@ -124,12 +135,12 @@ document.body.addEventListener("input", () => {
 
 //Event handler to autocomplete origin input from Amadeus Airport/City Search API
 originInput.addEventListener("input", () => {
-	
+	autocomplete(originInput, originOptions, originCityCodes);
 });
 
 //Event handler to autocomplete destination input from Amadeus Airport/City Search API
 destinationInput.addEventListener("input", () => {
-
+	autocomplete(destinationInput, destinationOptions, destinationCityCodes)
 });
 
 //Event handler to show or hide return date input depending on one-way or round-trip flight plans
@@ -143,7 +154,13 @@ flightTypeSelect.addEventListener("change", () => {
 
 //Searches for flight offers through Amadeus Flight Offers API
 searchButton.addEventListener("click", async() => {
+	searchResultsSeparator.classList.remove("d-none")
+	searchResultsLoader.classList.remove("d-none")
+	searchResults.textContent = "";
 
+	const results = await search();
+	searchResultsLoader.classList.add("d-none");
+	showResults(results);
 });
 
 //Ensures form is set to default
