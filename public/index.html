@@ -36,18 +36,16 @@
 									for="origin-input" 
 									class="form-label">Origin</label>
 								<div class="input-group">
-									<span class="input-group-text">
-										<i class="bi-pin-map-fill"></i>
-									</span>
-									<input 
-										type="text" 
-										class="form-control"
-										list="origin-options"
-										id="origin-input"
-										placeholder="Location"
-										aria-describedby="origin-label"
-									>
-									<datalist id="origin-options"></datalist>
+									<form autocomplete="off">
+										<div class="autocomplete" style="width:300px;">
+											<input
+												type="text"
+												id="origin-input"
+												name="myCountry" 
+												placeholder="Origin"
+												>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -59,18 +57,16 @@
 									for="destination-input"
 									class="form-label">Destination</label>
 								<div class="input-group">
-									<span class="input-group-text">
-										<i class="bi-pin-map-fill"></i>
-									</span>
-									<input 
-										type="text" 
-										class="form-control"
-										list="destination-options"
-										id="destination-input"
-										placeholder="Location"
-										aria-describedby="destination-label"
-									>
-									<datalist id="destination-options"></datalist>
+									<form autocomplete="off">
+										<div class="autocomplete" style="width:300px;">
+											<input
+												type="text"
+												id="destination-input"
+												name="myCountry"
+												placeholder="Destination"
+												>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -87,7 +83,7 @@
 								<label 
 									id="flight-type-label"
 									for="flight-type-select"
-									class="form-label">Flight</label>
+									class="form-label">Type of Flight</label>
 								<select
 									id="flight-type-select"
 									class="form-select"
@@ -143,6 +139,23 @@
 					<div class="h-100 card">
 						<div class="card-body">
 							<h4 class="card-title">Details</h4>
+							<div class="mb-2">
+								<label 
+									id="travel-class-label"
+									for="travel-class-select"
+									class="form-label"
+								>Travel class</label>
+								<select
+									id="travel-class-select"
+									class="form-select"
+									aria-describedby="travel-class-label"
+								>
+									<option value="ECONOMY">Economy</option>
+									<option value="PREMIUM_ECONOMY">Premium Economy</option>
+									<option value="BUSINESS">Business</option>
+									<option value="FIRST">First Class</option>
+								</select>
+							</div>
 							<label class="form-label">Number of Passengers</label>
 							<div class="mb-2">
 								<div class="input-group">
@@ -159,15 +172,56 @@
 									>
 								</div>
 							</div>
+							<div class="mb-2">
+								<div class="input-group">
+									<label 
+										for="children-input" 
+										class="input-group-text"
+									>Children</label>
+									<input
+										type="number"
+										min="0"
+										class="form-control"
+										id="children-input"
+										aria-describedby="children-label"
+									>
+								</div>
+							</div>
+							<div class="mb-2">
+								<div class="input-group">
+									<label 
+										for="infants-input" 
+										class="input-group-text"
+									>Infants</label>
+									<input
+										type="number"
+										min="0"
+										class="form-control"
+										id="infants-input"
+										aria-describedby="infants-label"
+									>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!--Search button-->
 			<button id="search-button" class="w-100 btn btn-primary">Search</button>
+			<div class="border-bottom mb-4 pt-4" id="search-results-separator"></div>
+			<div class="d-flex justify-content-center" id="search-results-loader">
+  				<div class="spinner-border" role="status">
+    				<span class="visually-hidden">Loading...</span>
+  				</div>
+			</div>
+			<ul class="list-group mb-4" id="search-results"></ul>
 		</div>
 		<!--Embeds script.js-->
 		<script src="./script.js"></script>
+		<script>
+			autocomplete(document.getElementById("origin-input"), airports);
+			autocomplete(document.getElementById("destination-input"), airports);
+		</script>
 	</body>
 </html>
 

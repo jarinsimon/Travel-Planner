@@ -35,7 +35,7 @@ app.get('/citySearch', async function(req, res){
 
 app.use(express.static("public"));
 
-app.get('/autocomplete', async(req, res) => {
+app.get('/api/autocomplete', async(req, res) => {
 	try {
 		const { query } = req;
 		const { data } = await amadeus.referenceData.locations.get({
@@ -49,7 +49,7 @@ app.get('/autocomplete', async(req, res) => {
 	}
 });
 
-app.get('/flightSearch', async(req, res) => {
+app.get('/api/search', async(req, res) => {
 	try{
 		const { query } = req;
 		console.log(query)
@@ -58,6 +58,8 @@ app.get('/flightSearch', async(req, res) => {
 			destinationLocationCode: query.destination,
 			departureDate: query.departureDate,
 			adults: query.adults,
+			children: query.children,
+			infants: query.infants,
 			...(query.returnDate ? { returnDate: query.returnDate } : {}),
 		});
 		res.json(data);
