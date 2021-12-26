@@ -36,18 +36,16 @@
 									for="origin-input" 
 									class="form-label">Origin</label>
 								<div class="input-group">
-									<span class="input-group-text">
-										<i class="bi-pin-map-fill"></i>
-									</span>
-									<input 
-										type="text" 
-										class="form-control"
-										list="origin-options"
-										id="origin-input"
-										placeholder="Location"
-										aria-describedby="origin-label"
-									>
-									<datalist id="origin-options"></datalist>
+									<form autocomplete="off">
+										<div class="autocomplete" style="width:300px;">
+											<input
+												type="text"
+												id="origin-input"
+												name="myCountry" 
+												placeholder="Origin"
+												>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -59,18 +57,16 @@
 									for="destination-input"
 									class="form-label">Destination</label>
 								<div class="input-group">
-									<span class="input-group-text">
-										<i class="bi-pin-map-fill"></i>
-									</span>
-									<input 
-										type="text" 
-										class="form-control"
-										list="destination-options"
-										id="destination-input"
-										placeholder="Location"
-										aria-describedby="destination-label"
-									>
-									<datalist id="destination-options"></datalist>
+									<form autocomplete="off">
+										<div class="autocomplete" style="width:300px;">
+											<input
+												type="text"
+												id="destination-input"
+												name="myCountry"
+												placeholder="Destination"
+												>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -222,6 +218,10 @@
 		</div>
 		<!--Embeds script.js-->
 		<script src="./script.js"></script>
+		<script>
+			autocomplete(document.getElementById("origin-input"), airports);
+			autocomplete(document.getElementById("destination-input"), airports);
+		</script>
 	</body>
 </html>
 
