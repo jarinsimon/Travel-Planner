@@ -26,7 +26,7 @@
 		<div class="container-sm">
 			<div class="my-2 card">
 				<div class="card-body">
-					<h4 class="card-title">Locations</h4>
+					<h4 class="card-title"><b>Locations</b></h4>
 					<div class="row">
 						<!--Origin card section-->
 						<div class="col-sm">
@@ -42,7 +42,8 @@
 												type="text"
 												id="origin-input"
 												name="myCountry" 
-												placeholder="Origin"
+												placeholder="Origin Airport"
+												oninput="originFunction()"
 												>
 										</div>
 									</form>
@@ -63,12 +64,19 @@
 												type="text"
 												id="destination-input"
 												name="myCountry"
-												placeholder="Destination"
+												placeholder="Destination Airport"
+												oninput="destinationFunction()"
 												>
 										</div>
 									</form>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm">
+							<p id="origin-field-display"></p>
+							<p id="destination-field-display"></p>
 						</div>
 					</div>
 				</div>
@@ -78,7 +86,7 @@
 				<div class="mb-2 col">
 					<div class="h-100 card">
 						<div class="card-body">
-							<h4 class="card-title">Flight Dates</h4>
+							<h4 class="card-title"><b>Dates</b></h4>
 							<div class="mb-2">
 								<label 
 									id="flight-type-label"
@@ -138,7 +146,7 @@
 				<div class="mb-2 col">
 					<div class="h-100 card">
 						<div class="card-body">
-							<h4 class="card-title">Details</h4>
+							<h4 class="card-title"><b>Details</b></h4>
 							<div class="mb-2">
 								<label 
 									id="travel-class-label"
@@ -207,7 +215,7 @@
 				</div>
 			</div>
 			<!--Search button-->
-			<button id="search-button" class="w-100 btn btn-primary">Search</button>
+			<button id="search-button" class="w-100 btn btn-primary" onclick="testSearch()">Search</button>
 			<div class="border-bottom mb-4 pt-4" id="search-results-separator"></div>
 			<div class="d-flex justify-content-center" id="search-results-loader">
   				<div class="spinner-border" role="status">
